@@ -56,51 +56,115 @@ public class Polynomial{
    * @return
    */
   public boolean isZero(){
-      if(this.summands == Polynomial.ZERO){
-          return this.summand.isZero();
-      }else{
-          return (this.summand.isZero() || this.summand == Monomial.ONE) && (this.summands.isZero());
+      if((this.summands == Polynomial.ZERO || this.summands == null) && this.summand == null) {
+          return true;
       }
+      if(this.summands == Polynomial.ZERO || this.summands == null){
+
+          return this.summand.isZero();
+      }
+      if(this.summand == null){
+
+          return this.summands.isZero();
+      }
+      // this.summand and this.summands aren't null
+      return this.summand.isZero() && this.summands.isZero();
   }
 
 
   public String toString(){
       if(this.isZero()){
-          return "0";
+          return "0"; //
       }else{
+          if(this.summands == Polynomial.ZERO || this.summands == null){
+                return this.summand.toString();
+          }
+          if(this.summand == null){
+                return this.summands.toString();
+          }
           return this.summand.toString() + "+" + this.summands.toString();
       }
   }
 
 
   public int getDegree(){
-      return Math.max(this.summand.getDegree(), this.summands.getDegree());
+      if(this.isZero()){
+          return 0;
+      }else{
+          if(this.summand == null){
+              return this.summands.getDegree();
+          }
+          if(this.summands == null || this.summands == Polynomial.ZERO){
+              return this.summand.getDegree();
+          }
+
+          return Math.max(this.summand.getDegree(), this.summands.getDegree());
+      }
+
   }
 
   public Polynomial substitute(String toSubstitute, double value){
-      if(this.isZero()){
-          return Polynomial.ZERO;
-      }else if(this.summands.isZero()){
-          return new Polynomial(this.summand.substitute(toSubstitute, value));
+      if(this.summand == null && (this.summands == null || this.summands == Polynomial.ZERO)){
+          try{
+              return new Polynomial(this);
+          }catch(Exception e){
+              System.out.println(e + "149");
+          }
+      }else if(this.summand != null && (this.summands == null || this.summands == Polynomial.ZERO)){
+          try{
+              return new Polynomial(this.summand.substitute(toSubstitute,value));
+          }catch(Exception e){
+              System.out.println(e + "155");
+          }
+      }else if(this.summand == null && (this.summands != null && this.summands != Polynomial.ZERO)){
+          try{
+              return new Polynomial(this.summands.substitute(toSubstitute, value));
+          }catch(Exception e){
+              System.out.println(e + "161");
+          }
       }else{
-          return new Polynomial(this.summand.substitute(toSubstitute, value), this.substitute(toSubstitute, value));
+          try{
+              return new Polynomial(this.summand.substitute(toSubstitute,value), this.summands.substitute(toSubstitute,value));
+          }catch(Exception e){
+              System.out.println(e + "167");
+          }
       }
+      return null;
   }
 
   public double evaluate(double value){
-      if(this.isZero()){
-          return 0.0;
+      if(this.summand == null && (this.summands == null || this.summands == Polynomial.ZERO)){
+          try{
+              return 0.0;
+          }catch(Exception e){
+              System.out.println(e + "185");
+          }
+      }else if(this.summand != null && (this.summands == null || this.summands == Polynomial.ZERO)){
+          try{
+              return this.summand.evaluate(value);
+          }catch(Exception e){
+              System.out.println(e + "191");
+          }
+      }else if(this.summand == null && (this.summands != null && this.summands != Polynomial.ZERO)){
+          try{
+              return this.summands.evaluate(value);
+          }catch(Exception e){
+              System.out.println(e + "197");
+          }
       }else{
-          return this.summand.evaluate(value) + this.summands.evaluate(value);
+          try{
+              return this.summand.evaluate(value) + this.summands.evaluate(value);
+          }catch(Exception e){
+              System.out.println(e + "203");
+          }
       }
+      return 0.0;
   }
 
   /**
   * @param input String representation of polynomial
   * @return the resulting polynomial
   */
-
-
   public static Polynomial parse(String input){
     if(input==null||input.equals("")){
       return ZERO;
@@ -113,7 +177,6 @@ public class Polynomial{
   }
 
 
-
   public static void main(String[] args){
     Polynomial p;
     Polynomial q;
@@ -123,6 +186,7 @@ public class Polynomial{
     for(String s : testValues ){
       System.out.println("----------------------------------------------------------------");
       System.out.println("Testing polynomial read from "+s+".");
+      System.out.println("----------------------------");
       p = parse(s);
       System.out.println(p);
       System.out.println("isZero?: "+p.isZero());
@@ -134,3 +198,4 @@ public class Polynomial{
       System.out.println("x substituted by 1, rest substituted by 0: "+q.evaluate(0.0));
     }
   }
+}

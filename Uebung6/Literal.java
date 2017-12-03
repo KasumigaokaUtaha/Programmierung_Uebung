@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 public class Literal{
   private final Typ type;
   private final double value;
@@ -67,46 +65,55 @@ public class Literal{
      * @return
      */
     public boolean isZero(){
-        return Objects.equals(this.name, "") && (this.value == 0.0);
+        if(this != null){
+            return this.name.equals("") && (this.value == 0.0);
+        }
+        return false;
     }
 
 
     public String toString(){
-        switch(this.name){
-            //Konstante
-            case "":
-                return (this.value) + "";
-            //Variable
-            default:
-                return this.name;
+        if(this != null){
+            switch(this.name){
+                //Konstante
+                case "":
+                    return "(" + this.value + ")";
+                //Variable
+                default:
+                    return this.name;
+            }
         }
+        return "";
     }
 
     public int getDegree(){
-        switch(this.name){
-            //Konstante
-            case "":
-                return 0;
-            //Variable
-            default:
-                return 1;
+        if(this != null){
+            switch(this.name){
+                //Konstante
+                case "":
+                    return 0;
+                //Variable
+                default:
+                    return 1;
+            }
         }
+        return 0;
     }
 
     public Literal substitute(String toSubstitute, double value){
-        if(this.isZero() || Objects.equals(this.name, "")){
-            return this;
-        }else if(toSubstitute == this.name){
+        if(this.isZero()){
+            return new Literal(this);
+        }else if(toSubstitute.equals(this.name)){
             return new Literal(value);
         }else{
-            return this;
+            return new Literal(this);
         }
     }
 
     public double evaluate(double value){
         if(this.isZero()){
             return 0.0;
-        }else if(!Objects.equals(this.name, "")){
+        }else if(!this.name.equals("")){
             // Literal ist eine Variable
             return value;
         }else{
@@ -122,20 +129,18 @@ public class Literal{
      * @return the resulting literal
      */
     public static Literal parse(String input){
-    if(input==null || input.equals("")){
-      return new Literal(1.);
-    }
-    double value = 0.;
-    String name = "";
-    input = input.replaceAll("[()]","");
-    try{
-      value = Double.parseDouble(input);
-      return new Literal(value);
-    }
-    catch(NumberFormatException e){
-      name = input;
-    }
+        if(input==null || input.equals("")){
+            return new Literal(1.);
+        }
+        double value = 0.;
+        String name = "";
+        input = input.replaceAll("[()]","");
+        try{
+            value = Double.parseDouble(input);
+            return new Literal(value);
+        }catch(NumberFormatException e){
+            name = input;
+        }
     return new Literal(name);
   }
-
 }

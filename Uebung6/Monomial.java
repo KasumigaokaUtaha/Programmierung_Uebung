@@ -69,24 +69,47 @@ public class Monomial{
      * Entscheide ob ein Monom 0 ist.
      * @return
      */
+    //有问题
   public boolean isZero(){
-      if(this.factors == Monomial.ONE){
-          return this.factor.isZero();
-      }else{
-          return this.factor.isZero() || this.factors.isZero();
+//      if(this.factors == Monomial.ONE){
+//          return this.factor.isZero();
+//      }else{
+//          return this.factor.isZero() || this.factors.isZero();
+//      }
+
+      if((this.factors == null || this.factors == Monomial.ONE) && this.factor == null){
+          return false;
       }
+
+      if(this.factors == null){
+          return this.factor.isZero();
+      }
+
+      if(this.factor == null){
+          return this.factors.isZero();
+      }
+      // this.factor and this.factors aren't null
+      return this.factor.isZero() || this.factors.isZero();
   }
 
 
   public String toString(){
-      if(this.factor == null && this.factors == Monomial.ONE){
-          return "1";
+      if(this.factor == null && this.factors == null){
+            return "";
       }else if(this.factor == null){
-          return this.factors.toString();
-      }else if(this.factors == Monomial.ONE){
+          if(this.factors == Monomial.ONE){
+              return "1";
+          }else{
+              return this.factors.toString();
+          }
+      }else if(this.factors == null){
           return this.factor.toString();
       }else{
-          return this.factor.toString() + "*" + this.factors.toString();
+          String res = this.factor.toString();
+          if(!(this.factors.toString().equals(""))){
+              res = res + "*" + this.factors.toString();
+          }
+          return res;
       }
   }
 
@@ -94,26 +117,75 @@ public class Monomial{
       if(this.isZero()){
           return 0;
       }else{
-          return this.factor.getDegree() + this.factors.getDegree();
+          if(this.factors == null){
+              return 0;
+          }else if(this.factor == null){
+                    if(this.factors == Monomial.ONE){
+                        return 0;
+                     }
+              return this.factors.getDegree();
+          }else{
+              return this.factor.getDegree() + this.factors.getDegree();
+          }
       }
   }
 
   public Monomial substitute(String toSubstitute, double value){
-      if(this.isZero()){
-          return Monomial.ONE;
+      if(this.factor == null && (this.factors == null || this.factors == Monomial.ONE)){
+            try{
+                return new Monomial(this);
+            }catch(Exception e){
+                System.out.println(e + "188");
+            }
+      }else if(this.factor != null && (this.factors == null || this.factors == Monomial.ONE)){
+            try{
+                return new Monomial(this.factor.substitute(toSubstitute,value));
+            }catch(Exception e){
+                System.out.println(e + "194");
+            }
+      }else if(this.factor == null && (this.factors != null && this.factors != Monomial.ONE)){
+            try{
+                return new Monomial(this.factors.substitute(toSubstitute, value));
+            }catch(Exception e){
+                System.out.println(e + "200");
+            }
       }else{
-          return new Monomial(this.factor.substitute(toSubstitute, value), this.factors.substitute(toSubstitute, value));
+          try{
+              return new Monomial(this.factor.substitute(toSubstitute,value), this.factors.substitute(toSubstitute,value));
+          }catch(Exception e){
+              System.out.println(e + "206");
+          }
       }
+      return null;
   }
 
   public double evaluate(double value){
-      if(this.isZero()){
-          return 0.0;
-      }else if(!this.factors.isZero()){
-          return this.factor.evaluate(value) * this.factors.evaluate(value);
+      if(this.factor == null && (this.factors == null || this.factors == Monomial.ONE)){
+          try{
+              return 1.0;
+          }catch(Exception e){
+              System.out.println(e + "225");
+          }
+      }else if(this.factor != null && (this.factors == null || this.factors == Monomial.ONE)){
+          try{
+              return this.factor.evaluate(value);
+          }catch(Exception e){
+              System.out.println(e + "231");
+          }
+      }else if(this.factor == null && (this.factors != null && this.factors != Monomial.ONE)){
+          try{
+              return this.factors.evaluate(value);
+          }catch(Exception e){
+              System.out.println(e + "237");
+          }
       }else{
-          return this.factor.evaluate(value);
+          try{
+              return this.factor.evaluate(value) * this.factors.evaluate(value);
+          }catch(Exception e){
+              System.out.println(e + "243");
+          }
       }
+      return 0.0;
   }
 
 

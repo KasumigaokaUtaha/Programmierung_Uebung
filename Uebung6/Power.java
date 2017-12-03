@@ -65,27 +65,29 @@ public class Power{
 
 
     public String toString(){
-        switch(this.exponent){
-            case 0:
-                return "1";
-            case 1:
-                return this.literal.toString();
-            default:
-                return this.literal.toString() + "^" + this.exponent;
+        if(this.literal != null){
+            switch(this.exponent){
+                case 0:
+                    return "1";
+                case 1:
+                    return this.literal.toString();
+                default:
+                    return this.literal.toString() + "^" + this.exponent;
+            }
         }
+        return null;
     }
 
     public int getDegree(){
-        if(this.literal.isZero()){
-            return 0;
-        }else{
+        if(this.literal != null){
             return this.literal.getDegree() * this.exponent;
         }
+        return 0;
     }
 
     public Power substitute(String toSubstitute, double value){
         if(this.isZero()){
-            return this;
+            return new Power(this);
         }else{
             return new Power(this.exponent, this.literal.substitute(toSubstitute, value));
         }
@@ -105,7 +107,6 @@ public class Power{
   * @param input  String representation of literal ^ exponent
   * @return the resulting power
   */
-
     public static Power parse(String input){
         if(input == null || input.equals("")){
             return new Power(Literal.parse(""));
@@ -121,9 +122,6 @@ public class Power{
     catch(NumberFormatException e){
       exponent = 1;
     }
-
     return new Power(exponent, Literal.parse(splitted[0]));
-
   }
-
 }
