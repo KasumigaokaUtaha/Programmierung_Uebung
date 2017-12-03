@@ -1,7 +1,5 @@
 public class Monomial{
-
   private final Power factor;
-
   private final Monomial factors;
 
     /**
@@ -38,14 +36,10 @@ public class Monomial{
     }
 
 
-
-
   /**
   * The empty monomial interpreted as 1
   */
   public static final Monomial ONE = new Monomial(null,null);
-
-
 
 
     /**
@@ -66,8 +60,8 @@ public class Monomial{
   }
 
     /**
-     * Entscheide ob ein Monom 0 ist.
-     * @return
+     * Determine whether an monomial is 0
+     * @return the resulting boolean
      */
   public boolean isZero(){
       if((this.factors == null || this.factors == Monomial.ONE) && this.factor == null){
@@ -85,7 +79,10 @@ public class Monomial{
       return this.factor.isZero() || this.factors.isZero();
   }
 
-
+  /**
+  * Convert an monomial to String
+  * @return the resulting String
+  */
   public String toString(){
       if(this.factor == null && this.factors == null){
             return "";
@@ -106,6 +103,15 @@ public class Monomial{
       }
   }
 
+
+  /**
+  * Get the degree of an monomial object
+  * a monomial has as a degree the
+  * sum of the degrees of the factors
+  * if the monomial is 0
+  * then it has degree 0
+  * @return the resulting degree of an monomial
+  */
   public int getDegree(){
       if(this.isZero()){
           return 0;
@@ -123,6 +129,13 @@ public class Monomial{
       }
   }
 
+
+  /**
+  * replace variable by value
+  * @param toSubstitute the variable to be replaced
+  * @param value value
+  * @return the resulting monomial object
+  */
   public Monomial substitute(String toSubstitute, double value){
       if(this.factor == null && (this.factors == null || this.factors == Monomial.ONE)){
             try{
@@ -152,6 +165,13 @@ public class Monomial{
       return null;
   }
 
+
+  /**
+  * Evaluate an monomial by replacing
+  * all variable with a constant
+  * @param value value
+  * @return the resulting value
+  */
   public double evaluate(double value){
       if(this.factor == null && (this.factors == null || this.factors == Monomial.ONE)){
           try{

@@ -55,15 +55,18 @@ public class Power{
     }
 
     /**
-     * Entscheide ob ein Potenz 0 ist.
-     * @return
+     * Determine whether an object is zero
+     * @return the resulting boolean
      */
     public boolean isZero(){
         return this.literal == null || (this.literal.isZero() && this.getExponent() > 0);
     }
 
 
-
+    /**
+    * Convert an power to String
+    * @return the resulting String
+    */
     public String toString(){
         if(this.literal != null){
             switch(this.exponent){
@@ -78,6 +81,14 @@ public class Power{
         return null;
     }
 
+
+    /**
+    * Get the degree of an power object
+    * power p^e has degree degree(p)*e
+    * if the bases p is null,
+    * then has this power degree 0
+    * @return the resulting degree of an power
+    */
     public int getDegree(){
         if(this.literal != null){
             return this.literal.getDegree() * this.exponent;
@@ -85,6 +96,13 @@ public class Power{
         return 0;
     }
 
+
+    /**
+    * replace variable by value
+    * @param toSubstitute the variable to be replaced
+    * @param value value
+    * @return the resulting power object
+    */
     public Power substitute(String toSubstitute, double value){
         if(this.isZero()){
             return new Power(this);
@@ -93,6 +111,13 @@ public class Power{
         }
     }
 
+
+    /**
+    * Evaluate an power by replacing
+    * the variable with a constant
+    * @param value value
+    * @return the resulting power
+    */
     public double evaluate(double value){
         if(this.isZero()){
             return 0.0;

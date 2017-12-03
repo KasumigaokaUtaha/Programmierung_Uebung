@@ -50,10 +50,9 @@ public class Polynomial{
   }
 
 
-
   /**
-   * Entscheide ob ein Polynom 0 ist.
-   * @return
+   * Determine whether an polynomial is 0
+   * @return the resulting boolean
    */
   public boolean isZero(){
       if((this.summands == Polynomial.ZERO || this.summands == null) && this.summand == null) {
@@ -71,7 +70,10 @@ public class Polynomial{
       return this.summand.isZero() && this.summands.isZero();
   }
 
-
+  /**
+  * Convert an polynomial to String
+  * @return the resulting String
+  */
   public String toString(){
       if(this.isZero()){
           return "0"; //
@@ -87,6 +89,12 @@ public class Polynomial{
   }
 
 
+  /**
+  * Get the degree of an polynomial object
+  * a polynomial has as degree the maximum
+  * of the degrees of the summands
+  * @return the resulting degree of an polynomial
+  */
   public int getDegree(){
       if(this.isZero()){
           return 0;
@@ -103,6 +111,13 @@ public class Polynomial{
 
   }
 
+
+  /**
+  * replace variable by value
+  * @param toSubstitute the variable to be replaced
+  * @param value value
+  * @return the resulting polynomial object
+  */
   public Polynomial substitute(String toSubstitute, double value){
       if(this.summand == null && (this.summands == null || this.summands == Polynomial.ZERO)){
           try{
@@ -132,6 +147,13 @@ public class Polynomial{
       return null;
   }
 
+
+  /**
+  * Evaluate a literal by replacing
+  * all variable with a constant
+  * @param value value
+  * @return the resulting value
+  */
   public double evaluate(double value){
       if(this.summand == null && (this.summands == null || this.summands == Polynomial.ZERO)){
           try{

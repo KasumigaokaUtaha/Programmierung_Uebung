@@ -61,8 +61,8 @@ public class Literal{
     }
 
     /**
-     *Entscheide ob ein Literal 0 ist.
-     * @return
+     * Entscheide ob ein Literal 0 ist.
+     * @return ob ein Literal 0 ist
      */
     public boolean isZero(){
         if(this != null){
@@ -71,7 +71,10 @@ public class Literal{
         return false;
     }
 
-
+    /**
+    * Converts a literal object to String
+    * @return the name of the variable or the constant in bracket
+    */
     public String toString(){
         if(this != null){
             switch(this.name){
@@ -86,6 +89,12 @@ public class Literal{
         return "";
     }
 
+    /**
+    * Get the degree of an literal object
+    * Constant has degree 0
+    * Variable has degree 1
+    * @return the resulting degree of a literal
+    */
     public int getDegree(){
         if(this != null){
             switch(this.name){
@@ -100,6 +109,12 @@ public class Literal{
         return 0;
     }
 
+    /**
+    * replace variable by value
+    * @param toSubstitute the variable to be replaced
+    * @param value value
+    * @return the resulting literal object
+    */
     public Literal substitute(String toSubstitute, double value){
         if(this.isZero()){
             return new Literal(this);
@@ -110,6 +125,12 @@ public class Literal{
         }
     }
 
+    /**
+    * Evaluate an literal by replacing
+    * the variable with a constant
+    * @param value value
+    * @return the resulting value
+    */
     public double evaluate(double value){
         if(this.isZero()){
             return 0.0;
