@@ -69,14 +69,7 @@ public class Monomial{
      * Entscheide ob ein Monom 0 ist.
      * @return
      */
-    //有问题
   public boolean isZero(){
-//      if(this.factors == Monomial.ONE){
-//          return this.factor.isZero();
-//      }else{
-//          return this.factor.isZero() || this.factors.isZero();
-//      }
-
       if((this.factors == null || this.factors == Monomial.ONE) && this.factor == null){
           return false;
       }
