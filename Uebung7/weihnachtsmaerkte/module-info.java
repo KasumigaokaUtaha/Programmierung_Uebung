@@ -1,0 +1,3 @@
+module weihnachtsmaerkte{
+    requires util;
+}
