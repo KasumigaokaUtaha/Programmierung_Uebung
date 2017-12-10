@@ -44,7 +44,7 @@ public class Weihnachtsartikelstand extends Stand implements Verschiebarkeit{
 
     }
 
-    
+
     public void verschiebe(int index){
         int besucherProStunde = this.berechneBesucherProStunde();
         System.out.printf("Stand %d wurde verschoben und wird jetzt von %d Passanten pro Stunde besucht.", index, besucherProStunde);
@@ -103,11 +103,5 @@ public class Weihnachtsartikelstand extends Stand implements Verschiebarkeit{
         Weihnachtsartikelstand test = new Weihnachtsartikelstand();
         test.verkaufe();
 
-//        for(Artikel x : test.getArtikels()){
-//            System.out.println(x.toString());
-//        }
-//
-//        System.out.println(test.getBesucherProStunde());
-//        test.verschiebe(10);
     }
 }

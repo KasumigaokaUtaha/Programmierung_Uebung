@@ -27,7 +27,7 @@ public class Lebensmittelstand extends Stand{
         }
 
         res = temp / 100 * this.preisProHundert;
-        System.out.println(res + "Euro, bitte.");
+        System.out.println(res + "Euro, bitte." + System.lineSeparator());
 
     }
 

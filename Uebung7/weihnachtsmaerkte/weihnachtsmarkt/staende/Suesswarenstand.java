@@ -23,11 +23,11 @@ public class Suesswarenstand extends Lebensmittelstand implements Verschiebarkei
         }
 
     public String getName(){
-        return "Suesswarenstand";
+        return "Suesswarenstand " + "(" + this.suesswaren + ")";
     }
 
     public static void main(String[] args){
         Suesswarenstand test = new Suesswarenstand();
-        test.verschiebe(9);
+        System.out.println(test.getName());
     }
 }

@@ -8,19 +8,13 @@ public class Weihnachtsmarkt {
 
     public Weihnachtsmarkt(int anzahlAnStand){
         this.staenden = new Stand[anzahlAnStand];
-
         int quotient = anzahlAnStand / 4;
         int remainder = anzahlAnStand % 4;
 
         for(int i = 0; i < 4; i++){
-
-
             for(int j = 0;j < quotient;){
-
                 int position = Zufall.zahl(anzahlAnStand);
                 if(this.staenden[position] == null){
-
-
                     switch(i){
                         case 0:
                             this.staenden[position] = new Weihnachtsartikelstand();
@@ -40,16 +34,12 @@ public class Weihnachtsmarkt {
                             break;
                     }
                 }
-
             }
         }
 
-
         if(remainder > 0){
             for(int i = 0; i < remainder;i++){
-
                 int index = castingIndex(this.staenden);
-
                 switch(i){
                     case 0:
                         this.staenden[index] = new Weihnachtsartikelstand();
@@ -79,21 +69,6 @@ public class Weihnachtsmarkt {
 
     //test
     public static void main(String[] args){
-//        Weihnachtsmarkt test = new Weihnachtsmarkt(122);
-//        int numW = 0, numS = 0, numG = 0, numF = 0;
-//        for(Stand x : test.getStaenden()){
-//            if(x instanceof Weihnachtsartikelstand){
-//                numW++;
-//            }else if(x instanceof Suesswarenstand){
-//                numS++;
-//            }else if(x instanceof Gluehweinstand){
-//                numG++;
-//            }else if(x instanceof Flammkuchenstand){
-//                numF++;
-//            }
-//        }
-//        System.out.println("--------------------------------");
-//        System.out.println(" W: " + numW + " S: " + numS + " G: " + numG + " F: " + numF);
         Weihnachtsmarkt test = new Weihnachtsmarkt(5);
         boolean weiterKaufen = true;
         while(weiterKaufen){
@@ -116,10 +91,8 @@ public class Weihnachtsmarkt {
                     ((Weihnachtsartikelstand) temp).verschiebe(j);
                 }
             }
-
             boolean temp = SimpleIO.getBoolean("Moechten Sie den Weihnachtsmarkt verlassen?");
             weiterKaufen = !temp;
         }
-
     }
 }
