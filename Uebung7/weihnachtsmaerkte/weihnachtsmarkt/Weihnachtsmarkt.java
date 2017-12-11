@@ -86,8 +86,10 @@ public class Weihnachtsmarkt {
             for(int j = 0;j < 5;j++){
                 Stand temp = test.getStaenden()[j];
                 if(temp instanceof Suesswarenstand && temp.getBesucherProStunde() < 30){
+                    System.out.println();
                     ((Suesswarenstand) temp).verschiebe(j);
                 }else if(temp instanceof Weihnachtsartikelstand && temp.getBesucherProStunde() < 30){
+                    System.out.println();
                     ((Weihnachtsartikelstand) temp).verschiebe(j);
                 }
             }
