@@ -97,4 +97,10 @@ public class MyMutableSet<T> extends MyAbstractSet<T> implements Set<T> {
     public boolean retainAll(Collection<?> c){
         throw new UnsupportedOperationException();
     }
+
+    public MyMinimalSet<T> freezeAndClear(){
+        MyImmutableSet<T> myImmutableSet = new MyImmutableSet<>(super.getHead());
+        this.setHead(null);
+        return myImmutableSet;
+    }
 }

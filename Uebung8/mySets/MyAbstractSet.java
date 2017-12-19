@@ -9,8 +9,8 @@ abstract class MyAbstractSet <T> implements Iterable <T> {
         this.head = null;
     }
 
-    MyAbstractSet(MySetElement<T> initalValue) {
-        this.head = initalValue;
+    MyAbstractSet(MySetElement<T> initialValue) {
+        this.head = initialValue;
     }
 
 
