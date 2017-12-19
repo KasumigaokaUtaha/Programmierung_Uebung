@@ -32,10 +32,9 @@ public class MyMutableSet<T> extends MyAbstractSet<T> implements Set<T> {
         super.setHead(null);
     }
 
+
     public boolean remove(Object o){
-
         if(super.contains(o)){
-
 //            ArrayList<T> arraylist = new ArrayList<>();
 //            Stack<T> stk = new Stack<>();
 //            Iterator<T> it = super.iterator();
@@ -57,6 +56,9 @@ public class MyMutableSet<T> extends MyAbstractSet<T> implements Set<T> {
 //            }
 //
 //            return true;
+
+
+            //remove the element mit value o
             MySetIterator<T> it = super.iterator();
             // wenn it.getCurrent().equals(o) is true, then the previous element is null
             if(it.getCurrent().equals(o)){
@@ -65,15 +67,14 @@ public class MyMutableSet<T> extends MyAbstractSet<T> implements Set<T> {
 //                MySetElement<T> tmp = it.getPrevious(o);
 //                tmp.setNext(tmp.getNext().getNext());
                 while(it.hasNext()){
-                    MySetElement<T> temp = it.getCurrent();
+                    MySetElement<T> current = it.getCurrent();
                     MySetElement<T> successor = it.getSuccessor();
-                    if(temp.getValue().equals(o)){
-                        successor.setNext(temp.getNext());
+                    if(current.getValue().equals(o)){
+                        successor.setNext(current.getNext());
                     }
                     it.next();
                 }
             }
-
 
         }
         if(o == null){
