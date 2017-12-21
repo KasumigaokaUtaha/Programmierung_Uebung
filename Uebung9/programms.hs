@@ -38,10 +38,10 @@ selectKsmallestHilfe k (x : xs)     | k == 1             = x
 
 
 insertionsort :: [Int] -> [Int]
-insertionsort [] = []
+insertionsort [] = []                -- when xs is [] , end of the recursion.
 insertionsort (x : xs) = insert x (insertionsort xs)
 
 insert :: Int -> [Int] -> [Int]
-insert x [] = [x]
+insert x [] = [x]         -- when ys is [] , end of the recursion.
 insert x (y : ys)    | x < y          = x : y : ys
                      | otherwise      = y : insert x ys
