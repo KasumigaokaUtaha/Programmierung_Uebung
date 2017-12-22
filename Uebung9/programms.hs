@@ -24,7 +24,7 @@ isSorted (x : y : zs)       = x < y && isSorted (y : zs)
 interval :: Int -> Int -> [Int]
 interval a b        | a > b     = []
                     | a == b    = [a]
-                    | a < b     = [a] ++ interval (a + 1) b
+                    | a < b     = a : (interval (a + 1) b)
 
 
 selectKsmallest :: Int -> [Int] -> Int
