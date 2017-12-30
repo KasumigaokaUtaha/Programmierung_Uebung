@@ -1,6 +1,6 @@
 import java.util.*;
 public class List {
-    Element head;
+    Element head = null;
 
     // Teilaufgabe a
     public boolean contains(int n){
