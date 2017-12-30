@@ -22,6 +22,7 @@ public class List {
             }else{
                 throw new DuplicateFoundException(current.value);
             }
+            current = current.next;
         }
         return linkedlist;
     }
