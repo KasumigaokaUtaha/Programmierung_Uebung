@@ -34,7 +34,6 @@ public class List {
              linkedlist = this.copyElements();
         }catch(Exception e){
             System.out.println(e);
-            return null;
         }
         String res = "";
         for(Integer i : linkedlist){
