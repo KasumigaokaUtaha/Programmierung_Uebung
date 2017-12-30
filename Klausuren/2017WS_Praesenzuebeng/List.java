@@ -17,7 +17,7 @@ public class List {
         Element current = this.head;
 
         while(current != null){
-            if(!linkedlist.contains(current.value)){
+            if(current.next != null && !current.next.contains(current.value)){
                 linkedlist.add(current.value);
             }else{
                 throw new DuplicateFoundException(current.value);
