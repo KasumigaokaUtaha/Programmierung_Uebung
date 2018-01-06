@@ -44,16 +44,27 @@ class MySetIterator <T> implements Iterator <T>{
     }
 
     public MySetElement<T> getPrevious(Object value){
-        MySetElement<T> tmp = null;
+        MySetElement<T> previous = null;
         while(this.hasNext()){
             MySetElement<T> next = this.current.getNext();
             if(next != null && next.getValue().equals(value)){
-                tmp = this.current;
+                previous = this.current;
                 break;
             }
             this.current = next;
         }
-        return tmp;
+        return previous;
+
+        // another implementation
+        /**
+        * while(this.hasNext()){
+        *   T next = this.next();
+        *   if(next != null && next.equals(value)){
+        *       return this.getSuccessor();
+        *   }
+        * }
+        * return null; // previous MySetElement of Object value not found
+        */
     }
 
     public static void main(String[] args){
