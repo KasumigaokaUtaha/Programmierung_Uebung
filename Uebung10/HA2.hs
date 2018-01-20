@@ -97,3 +97,28 @@ getValue ((Leaf value) : [])      = [value]
 getValue ((Node x y _) : [])      = [x, y]
 getValue ((Leaf value) : trees)   = value : getValue(trees)
 getValue ((Node x y _) : trees)   = [x, y] ++ getValue(trees)
+
+contains :: MultTree Int -> Int -> Bool
+contains (Leaf value) valueToCheck  | value == valueToCheck = True
+                                    | otherwise = False
+contains (Node minNum maxNum trees) valueToCheck    | minNum < valueToCheck
+                                                        && valueToCheck < maxNum = containsHilf trees valueToCheck
+                                                    | minNum == valueToCheck
+                                                        || valueToCheck == maxNum = True
+                                                    | otherwise = False
+
+containsHilf :: [MultTree Int] -> Int -> Bool
+containsHilf [] _ = False
+containsHilf ((Leaf value) : []) valueToCheck       = if value == valueToCheck then True else False
+containsHilf ((Node minNum maxNum trees) : []) valueToCheck | minNum < valueToCheck
+                                                                && valueToCheck < maxNum = containsHilf trees valueToCheck
+                                                            | minNum == valueToCheck
+                                                                || valueToCheck == maxNum = True
+                                                            | otherwise = False
+containsHilf ((Leaf value) : trees) valueToCheck            | value == valueToCheck = True
+                                                            | otherwise             = containsHilf trees valueToCheck
+containsHilf ((Node minNum maxNum trees) : multTrees) valueToCheck      | minNum < valueToCheck
+                                                                            && valueToCheck < maxNum = containsHilf trees valueToCheck
+                                                                        | minNum == valueToCheck
+                                                                            || valueToCheck == maxNum = True
+                                                                        | otherwise = containsHilf multTrees valueToCheck  
