@@ -32,5 +32,5 @@ skalarprodukt Nil Nil       = 0
 skalarprodukt Nil _         = 0
 skalarprodukt _ Nil         = 0
 skalarprodukt lista listb   = foldList sum 0 resList
-                                where sum = \x y -> x + y
-                                    resList = zipLists (\x y -> x * y) lista listb
+                                where   sum = \x y -> x + y
+                                        resList = zipLists (\x y -> x * y) lista listb

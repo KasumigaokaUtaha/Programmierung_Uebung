@@ -80,7 +80,6 @@ datenIntervalle (Node x y trees)        = Node a b tree
                                                         a = minimum(getValue tree)
                                                         b = maximum(getValue tree)
 
---multTreeMaxMin(Node x y (datenIntervalleHilf trees))
 
 datenIntervalleHilf :: [MultTree Int] ->[MultTree Int]
 datenIntervalleHilf []                              = []
@@ -121,4 +120,4 @@ containsHilf ((Node minNum maxNum trees) : multTrees) valueToCheck      | minNum
                                                                             && valueToCheck < maxNum = containsHilf trees valueToCheck
                                                                         | minNum == valueToCheck
                                                                             || valueToCheck == maxNum = True
-                                                                        | otherwise = containsHilf multTrees valueToCheck  
+                                                                        | otherwise = containsHilf multTrees valueToCheck
