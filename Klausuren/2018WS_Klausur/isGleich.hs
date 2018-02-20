@@ -25,7 +25,6 @@ isGleich (x : xs) ys | xs == [] = if (filter ((\x y -> x /= y) x) ys) == []
                                     then isGleich xs ys
                                         else False
 
-
 isComplete :: Tree -> Bool
 isComplete (Node left value right) = isGleich pfadLLength pfadRLength
                                     where pfadL = pfadList left
